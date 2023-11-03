@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>D3D12_learning_notes | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="graphics pipeline in DirectX 12.  Fixed-function stages (blue): cannot change how they process data, but can configure them using the DirectX 12 API. Such as imachines in a factory. Programmable stage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="D3D12_learning_notes">
+<meta property="og:url" content="http://example.com/2023/10/18/D3D12-learning-notes/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="graphics pipeline in DirectX 12.  Fixed-function stages (blue): cannot change how they process data, but can configure them using the DirectX 12 API. Such as imachines in a factory. Programmable stage">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-10-18T15:47:10.000Z">
+<meta property="article:modified_time" content="2023-11-03T20:13:45.859Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/10/18/D3D12-learning-notes/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'D3D12_learning_notes',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-03 16:13:45'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/1080250.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">D3D12_learning_notes</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-10-18T15:47:10.000Z" title="Created 2023-10-18 11:47:10">2023-10-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-11-03T20:13:45.859Z" title="Updated 2023-11-03 16:13:45">2023-11-03</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="graphics-pipeline-in-DirectX-12"><a href="#graphics-pipeline-in-DirectX-12" class="headerlink" title="graphics pipeline in DirectX 12."></a>graphics pipeline in DirectX 12.</h1><p><img src="/D3D12-learning-notes/3.png"></p>
+<ol>
+<li>Fixed-function stages (blue): cannot change how they process data, but can configure them using the DirectX 12 API. Such as imachines in a factory.</li>
+<li>Programmable stages(green): can write a shadow program like HLSL to define exactly how data is processed. Such as a program a robot in a factory.</li>
+</ol>
+<ul>
+<li><p>Input-Assembler(IA) stage: read primitive data from user-defined vertex and index buffers and assemble that data into geometric primitives.</p>
+</li>
+<li><p>Vertex Shader(VS) Stage<br>transform the vertex data from object-space into clip-space.</p>
+</li>
+<li><p>Hull Shader(HS) Stage<br>It is responsible for determining how much an input control patch should be tessellated by the tesslation.</p>
+</li>
+</ul>
+<h1 id="general-section"><a href="#general-section" class="headerlink" title="general section"></a>general section</h1><p>Globaly learning DirectX. </p>
+<h2 id="useful-functions"><a href="#useful-functions" class="headerlink" title="useful functions"></a>useful functions</h2><ol>
+<li>IDXGI Factory (DirectX Graphic Infrastructure)<br>Enum Adapters and Creating Swap Chain<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">GRS_THROW_IF_FAILED</span>(<span class="built_in">CreateDXGIFactory2</span>(nDXGIFactoryFlags, <span class="built_in">IID_PPV_ARGS</span>(&amp;pIDXGIFactory5)));</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="creating-resources"><a href="#creating-resources" class="headerlink" title="creating resources"></a>creating resources</h2><h3 id="CreateCommittedResouce"><a href="#CreateCommittedResouce" class="headerlink" title="CreateCommittedResouce"></a>CreateCommittedResouce</h3><p>implicit heap: the heap object can’t be obtained by the application. Just call the heap and use it directly, do not need to build the heap manually. But hard to control the detail of the heap.</p>
+<h3 id="CreatePlacedResource"><a href="#CreatePlacedResource" class="headerlink" title="CreatePlacedResource"></a>CreatePlacedResource</h3><h3 id="CreatReservedResource"><a href="#CreatReservedResource" class="headerlink" title="CreatReservedResource"></a>CreatReservedResource</h3><h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> </span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">D3D12_HEAP_TYPE</span></span><br><span class="line">&#123;</span><br><span class="line">    D3D12_HEAP_TYPE_DEFAULT            = <span class="number">1</span>, </span><br><span class="line">    D3D12_HEAP_TYPE_UPLOAD             = <span class="number">2</span>,</span><br><span class="line">    D3D12_HEAP_TYPE_READBACK           = <span class="number">3</span>,</span><br><span class="line">    D3D12_HEAP_TYPE_CUSTOM              = <span class="number">4</span></span><br><span class="line">&#125; D3D12_HEAP_TYPE;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DEFAULT: creating buffet when D3Dxx_USAGE &#x3D; Default, only GPU  could access the data, CPU can not directly access the data. Which means it usually in $\textbf{video memory}$. Always insert some data hard to change in it, such as texture. </li>
+<li>UPLOAD: GPU can not load the data, so upload heap is using to load the data in DEFAULT heap. For GPU “read only”, For CPU “write only”. For do not change.</li>
+<li>READBACK: the oppsite of UPLOAD</li>
+</ul>
+<h2 id="Resource-Barrier"><a href="#Resource-Barrier" class="headerlink" title="Resource Barrier"></a>Resource Barrier</h2><p>Handle the parallelism problem between copy engine and graphic command engine. Ep. The texture is large enough and $\textbf{memcopy}$ need some time to copy. But the graphic command engine do not know that and already start $\textbf{Draw Call}$ the texture, which lead the unfinished texture to be rendered.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//send the command to the command heap of copy something from UPLOAD heap to DEFAULT heap</span></span><br><span class="line"><span class="function">CD3DX12_TEXTURE_COPY_LOCATION <span class="title">Dst</span><span class="params">(pITexcute.Get(), <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="function">CD3DX12_TEXTURE_COPY_LOCATION <span class="title">Src</span><span class="params">(pITextureUpload.Get(), stTxtLayouts)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// directly command a list&#x27;s object.</span></span><br><span class="line">pICommandList-&gt;<span class="built_in">CopyTextureRegion</span>(&amp;Dst, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, &amp;Src, <span class="literal">nullptr</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Resource Barrier</span></span><br><span class="line">D3D12_RESOURCE_BARRIER stResBar = &#123;&#125;;</span><br><span class="line">stResBar.Type			= D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;</span><br><span class="line">stResBar.Flags			= D3D12_RESOURCE_BARRIER_FLAG_NONE;</span><br><span class="line">stResBar.Transition.pResource	= pITexcute.<span class="built_in">Get</span>();</span><br><span class="line">stResBar.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;</span><br><span class="line">stResBar.Transition.StateAfter	= D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;</span><br><span class="line">stResBar.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;</span><br><span class="line"> </span><br><span class="line">pICommandList-&gt;<span class="built_in">ResourceBarrier</span>(<span class="number">1</span>, &amp;stResBar);</span><br></pre></td></tr></table></figure>
+
+<p>In my understanding, because command heap’s excution on GPU is in serial order, which means rescource barrier is just like crossbars at supermarket checkout counters.</p>
+<h2 id="Fence"><a href="#Fence" class="headerlink" title="Fence"></a>Fence</h2><p>A marker let you know when GPU or CPU has finished doing there work so they can be synchronised.</p>
+<h2 id="Swap-Chain"><a href="#Swap-Chain" class="headerlink" title="Swap Chain"></a>Swap Chain</h2><p><img src="/D3D12-learning-notes/4.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">unit8_t</span> g_NumFrames = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>must more than 2 if using flip ppresentation model.</p>
+<h2 id="Transformation-Pipeline"><a href="#Transformation-Pipeline" class="headerlink" title="Transformation Pipeline"></a>Transformation Pipeline</h2><ol>
+<li>World Transform: change each 3D model’s coordinates into world coordinates.</li>
+<li>View Transform: $V &#x3D; T \cdot R_z \cdot R_y \cdot R_z$</li>
+<li>Projection Transform:</li>
+</ol>
+<p><img src="/D3D12-learning-notes/1.png"><br><img src="/D3D12-learning-notes/2.png"><br>4. Clip transform: ignore the part not in the camera.</p>
+<h2 id="Render-Target-View-RTV"><a href="#Render-Target-View-RTV" class="headerlink" title="Render Target View(RTV):"></a>Render Target View(RTV):</h2><p>The purpose of it is just tell GPU how to render at back buffer before swap. If without RTV, the GPU will not know where the rendered pixel should be sent.</p>
+<h1 id="glossary-of-CG"><a href="#glossary-of-CG" class="headerlink" title="glossary of CG"></a>glossary of CG</h1><ul>
+<li><p>mipmap: a set of pictures, with different level of pixels. Becasue off-site viewing do not need that detailed.</p>
+</li>
+<li><p>SRV(shader resource view): wrapping textures in a format that the shadow can access them. Read Only. For example : a single texture, individual arrays, planes, or colors from a mipmapped texture, 3D texture, 1D texture color gradinets, etc.</p>
+</li>
+<li><p>UAV(unordered access view): same as SRV, but can read or write in any order, even could read&#x2F;written simultaneously by multipl,e threads without generate memory conflicts.</p>
+</li>
+<li><p>root signatures: link command to the resources the shaders require. It determines the type of data the shaders should expect, but does not define the actural memory or data. For graphics command list has both a graphics and compute root signature, for compute command list have one compute root signature. These root signatures are independent of each others.</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2023/10/18/D3D12-learning-notes/">http://example.com/2023/10/18/D3D12-learning-notes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/20/ue5-learning-notes/" title="ue5-learning-notes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">ue5-learning-notes</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/17/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" href="dotafs.com"><i class="fab fa-github"></i><span>My Blog</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">My portfolio and learning of rendering</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#graphics-pipeline-in-DirectX-12"><span class="toc-number">1.</span> <span class="toc-text">graphics pipeline in DirectX 12.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#general-section"><span class="toc-number">2.</span> <span class="toc-text">general section</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#useful-functions"><span class="toc-number">2.1.</span> <span class="toc-text">useful functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#creating-resources"><span class="toc-number">2.2.</span> <span class="toc-text">creating resources</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CreateCommittedResouce"><span class="toc-number">2.2.1.</span> <span class="toc-text">CreateCommittedResouce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CreatePlacedResource"><span class="toc-number">2.2.2.</span> <span class="toc-text">CreatePlacedResource</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CreatReservedResource"><span class="toc-number">2.2.3.</span> <span class="toc-text">CreatReservedResource</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap"><span class="toc-number">2.3.</span> <span class="toc-text">Heap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resource-Barrier"><span class="toc-number">2.4.</span> <span class="toc-text">Resource Barrier</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fence"><span class="toc-number">2.5.</span> <span class="toc-text">Fence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Swap-Chain"><span class="toc-number">2.6.</span> <span class="toc-text">Swap Chain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformation-Pipeline"><span class="toc-number">2.7.</span> <span class="toc-text">Transformation Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Render-Target-View-RTV"><span class="toc-number">2.8.</span> <span class="toc-text">Render Target View(RTV):</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#glossary-of-CG"><span class="toc-number">3.</span> <span class="toc-text">glossary of CG</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/1080250.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
