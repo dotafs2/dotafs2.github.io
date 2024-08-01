@@ -87,8 +87,11 @@
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_7.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_5.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_6.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_8.jpg">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_9.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_10.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-01T09:19:22.930Z">
+<meta property="article:modified_time" content="2024-08-01T13:51:38.033Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/1_1.jpg">
@@ -288,7 +291,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          753 words
+          795 words
         
       </span>
     
@@ -772,10 +775,19 @@
 <p><img src="/2024/07/23/CS5310-final-project/9_6.gif" srcset="/img/loading.gif" lazyload alt="Ground Shading + Sinusoids Wave"></p>
 <p>The result is not continuous, but it is as expected, because each face is populated by that face’s own <code>normal</code>, so the two faces don’t have the same <code>normal</code> so there will be this difference.<br>I have two idea to avoid this:  </p>
 <ol>
-<li>I’m going to output the <code>normal</code> mapping, by representing the normals of all the points in rgb and thus outputting them.</li>
-<li>I am going to build a offline renderer, and 100 times the amount of the triangles.</li>
+<li>Normal Mapping: I’m going to output the <code>normal</code> mapping, by representing the normals of all the points in rgb and thus outputting them.</li>
+<li>Offline Renderer: I am going to build a offline renderer, and 100 times the amount of the triangles.</li>
 </ol>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/38280537">https://zhuanlan.zhihu.com/p/38280537</a></p>
+<p>Normally normal mapping requires storage and texture, but we don’t have texture yet, I’m going to implement this step after texture. So I build a offline renderer and render the image for 1 second and here is the result.<br><img src="/2024/07/23/CS5310-final-project/9_8.jpg" srcset="/img/loading.gif" lazyload alt="Ground Shading + Sinusoids Wave (offline)"></p>
+<p>I built a realtime macro, which will change all the function and interface to realtime or offline, make me much more eaiser to control the code. For example, the code below is changing drawing speed of the code.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">if</span>(realtime) <span class="hljs-comment">// realtime rendering</span><br>    timer-&gt;<span class="hljs-built_in">start</span>(<span class="hljs-number">10</span>); <span class="hljs-comment">// 10 ms per draw</span><br><span class="hljs-keyword">else</span> <span class="hljs-comment">// offline rendering</span><br>    timer-&gt;<span class="hljs-built_in">start</span>(<span class="hljs-number">1000</span>); <span class="hljs-comment">// 1000 ms per draw</span><br></code></pre></td></tr></table></figure>
+
+
+<p>Its really fun, I try to change the formula not directly implement the height by x and y, but input the $\sqrt{x^2+z^2}$ replace x or z.</p>
+<p><img src="/2024/07/23/CS5310-final-project/9_9.gif" srcset="/img/loading.gif" lazyload alt="Ground Shading + Sinusoids Wave (offline)"></p>
+<p>Then try to put the center point to the center of the water surface, simply calculate the distance by $\sqrt{(x-\frac{width}{4})^2+(z-\frac{height}{4})^2}$, width and height are the number of polygon’s vertex in my algorithm.</p>
+<p><img src="/2024/07/23/CS5310-final-project/9_10.gif" srcset="/img/loading.gif" lazyload alt="Ground Shading + Sinusoids Wave (offline)"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] </p>
 
                 
               </div>
