@@ -92,10 +92,12 @@
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/9_10.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/10_1.jpg">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/10_2.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/10_3.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/11_1.jpg">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/11_2.jpg">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_1.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-05T04:54:05.623Z">
+<meta property="article:modified_time" content="2024-08-06T12:11:05.455Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/1_1.jpg">
@@ -295,7 +297,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          857 words
+          878 words
         
       </span>
     
@@ -805,8 +807,8 @@
 </div>
 
 
-
-
+<p>Combining three different kinds of waveforms to make the picture random enough, and also combine the texture we calculate just now. Here is the result of.</p>
+<p><img src="/2024/07/23/CS5310-final-project/10_3.gif" srcset="/img/loading.gif" lazyload alt="Ground Shading + Sinusoids Wave (three different kind of waves) + texture (offline)"></p>
 <h1 id="11-SkyBox"><a href="#11-SkyBox" class="headerlink" title="11. SkyBox"></a>11. SkyBox</h1><p>Implementing a skybox, based on our system I have the following ideas. I spend 3 days on this , make me really depressed, it should not that hard, because there are lots of problem of bounding in fillscan of my code before.</p>
 <ol>
 <li>The skybox doesn’t need to introduce a zbuffer, he gets rendered first and all subsequent renders override the skybox just fine. </li>
@@ -819,9 +821,10 @@
   <img src="11_2.jpg" srcset="/img/loading.gif" lazyload title="A regular image" width="500px" height="300px">
 </div>
 
-
-
 <p>At the beginning, I didn’t want to use linear interpolation to compute the skybox because I thought this method would be very time-consuming. In my opinion, the correct approach should be to get the transformation matrix for each surface of the skybox, then apply this matrix to the transformation after reading the image, and map it to each face. This would greatly reduce the computational load since it wouldn’t require operations like fillScan. However, I eventually gave up because it was too complicated. I needed to record all boundary conditions and calculate the matrix for each surface. So, I ended up using the simplest method: directly applying the texture to each surface.</p>
+<h1 id="12-Particle"><a href="#12-Particle" class="headerlink" title="12. Particle"></a>12. Particle</h1><p>There’s a very famous paper: <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">Position Based Fluids</a>(I’ll definitely implement it with our model in the future, no matter how long it takes)</p>
+<p>I really want to try and implement this paper, but after thoroughly understanding what I need to do, using our model, I think I’ll need half a month to a month, but I’ve only got 5 days, so I’m going to implement an elder algorithm (not fully be implemented): <a target="_blank" rel="noopener" href="https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=1739fd145ef1d327ab301cacc017af2a87f33086">Particle-Based Fluid Simulation</a></p>
+<p><img src="/2024/07/23/CS5310-final-project/12_1.gif" srcset="/img/loading.gif" lazyload alt="Partticle + Gravity = -9.8 "></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] </p>
 
                 
