@@ -96,8 +96,10 @@
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/11_1.jpg">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/11_2.jpg">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_1.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_2.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_3.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-06T12:11:05.455Z">
+<meta property="article:modified_time" content="2024-08-07T13:40:30.299Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/1_1.jpg">
@@ -297,7 +299,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          878 words
+          901 words
         
       </span>
     
@@ -822,9 +824,16 @@
 </div>
 
 <p>At the beginning, I didn’t want to use linear interpolation to compute the skybox because I thought this method would be very time-consuming. In my opinion, the correct approach should be to get the transformation matrix for each surface of the skybox, then apply this matrix to the transformation after reading the image, and map it to each face. This would greatly reduce the computational load since it wouldn’t require operations like fillScan. However, I eventually gave up because it was too complicated. I needed to record all boundary conditions and calculate the matrix for each surface. So, I ended up using the simplest method: directly applying the texture to each surface.</p>
-<h1 id="12-Particle"><a href="#12-Particle" class="headerlink" title="12. Particle"></a>12. Particle</h1><p>There’s a very famous paper: <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">Position Based Fluids</a>(I’ll definitely implement it with our model in the future, no matter how long it takes)</p>
-<p>I really want to try and implement this paper, but after thoroughly understanding what I need to do, using our model, I think I’ll need half a month to a month, but I’ve only got 5 days, so I’m going to implement an elder algorithm (not fully be implemented): <a target="_blank" rel="noopener" href="https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=1739fd145ef1d327ab301cacc017af2a87f33086">Particle-Based Fluid Simulation</a></p>
+<h1 id="12-Particle"><a href="#12-Particle" class="headerlink" title="12. Particle"></a>12. Particle</h1><p>There’s a very famous paper to simulate water : <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">Position Based Fluids</a>. I really want to imply this paper, but after thoroughly understanding what I need to do, I think I’ll need half a month to a month, but I’ve only got several days, so I’m going to implement an basic algorithm of this paper: PBD.</p>
+<h2 id="Force"><a href="#Force" class="headerlink" title="Force"></a>Force</h2><p>Build a Particle and give a Gravity to it, the particle only have several faces as you see, this is because I wanna to make my program as fast as possible.</p>
 <p><img src="/2024/07/23/CS5310-final-project/12_1.gif" srcset="/img/loading.gif" lazyload alt="Partticle + Gravity = -9.8 "></p>
+<p>One of the most basic things about PBD is that it <code>relies on position</code> to calculate acceleration and velocity, rather than the traditional reliance on acceleration and velocity to find position. So here is the structure of my particle.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// Particle structure for water simulation</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Particle</span>&#123;</span><br>    Point position;  <span class="hljs-comment">// Position of the particle</span><br>    Point pred_position; <span class="hljs-comment">// Next dt position</span><br>    Vector v; <span class="hljs-comment">// Velocity of the particle</span><br>    Vector acceleration; <span class="hljs-comment">// Acceleration of the particle</span><br>    Vector vorticity;<br>    Vector externalForce;<br>    Vector oneTimeForce; <span class="hljs-comment">// only use one time and dead</span><br>    <span class="hljs-type">int</span> oneTimeForceAlive;<br>    <span class="hljs-type">float</span> mass;     <span class="hljs-comment">// Mass of the particle</span><br>    Bin neighbours;<br>    <span class="hljs-type">float</span> lambda ;<br>    <span class="hljs-type">int</span> id ;<br>    <span class="hljs-type">const</span> <span class="hljs-type">int</span> size ;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>I add a new function <code>Apply One Time Force</code> and <code>A Bounding box System</code> to achieve the image below, here is the thing, I can not simply add a init velocity to the system, because it is <code>position based system</code>, I can only add one time force in the system.</p>
+<p><img src="/2024/07/23/CS5310-final-project/12_2.gif" srcset="/img/loading.gif" lazyload alt="Extra Force.x = -2 ; Gravity.y = -9.8 ; damping = 0.6 "></p>
+<p><img src="/2024/07/23/CS5310-final-project/12_3.gif" srcset="/img/loading.gif" lazyload alt="Extra Force.x = -2 ; Gravity.y = -9.8 ; damping = 0.8 "></p>
+<h2 id="Constraint"><a href="#Constraint" class="headerlink" title="Constraint"></a>Constraint</h2><p>I am going to implement the most simple constraint which is <code>distance constraint</code> </p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] </p>
 
                 
