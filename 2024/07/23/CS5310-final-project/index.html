@@ -98,8 +98,12 @@
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_1.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_2.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_3.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_5.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_4.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_7.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/13_1.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-07T13:40:30.299Z">
+<meta property="article:modified_time" content="2024-08-09T18:55:15.035Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/1_1.jpg">
@@ -299,7 +303,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          901 words
+          964 words
         
       </span>
     
@@ -310,7 +314,7 @@
         
         
         
-          8 mins
+          9 mins
         
       </span>
     
@@ -833,7 +837,14 @@
 <p>I add a new function <code>Apply One Time Force</code> and <code>A Bounding box System</code> to achieve the image below, here is the thing, I can not simply add a init velocity to the system, because it is <code>position based system</code>, I can only add one time force in the system.</p>
 <p><img src="/2024/07/23/CS5310-final-project/12_2.gif" srcset="/img/loading.gif" lazyload alt="Extra Force.x = -2 ; Gravity.y = -9.8 ; damping = 0.6 "></p>
 <p><img src="/2024/07/23/CS5310-final-project/12_3.gif" srcset="/img/loading.gif" lazyload alt="Extra Force.x = -2 ; Gravity.y = -9.8 ; damping = 0.8 "></p>
-<h2 id="Constraint"><a href="#Constraint" class="headerlink" title="Constraint"></a>Constraint</h2><p>I am going to implement the most simple constraint which is <code>distance constraint</code> </p>
+<p><img src="/2024/07/23/CS5310-final-project/12_5.gif" srcset="/img/loading.gif" lazyload alt="1000 particles"></p>
+<p>After adding 1000 the particles to the system, we found that they can not detect each other, which menas there is no collison in the sytstem. But here is the point, how to detected the particles around each particles ? We need a new structure : Grid[][][], we put all the particles in the gird, if we wanna to find the neighbour particles around the target particles, just get all the particles from grids which around the target particles. After that, we need a new method <code>distance constraint</code> to find how to deal with the collsion by a eaiser way.</p>
+<h2 id="Constraint"><a href="#Constraint" class="headerlink" title="Constraint"></a>Constraint</h2><p>The most simple constraint which is <code>distance constraint</code>, my understanding is that we need to make sure that each point is as far as possible to where we expect it to be, and if that doesn’t work then fine-tune until the whole system is close to stable.</p>
+<p>$$\nabla C_{ij} &#x3D; \frac{p_i - p_j}{| p_i - p_j |}t$$<br>$$\lambda_i &#x3D; \frac{-C_{ij}}{\sum_k (\nabla C_{ik})^2}$$<br>$$\Delta p_i &#x3D; \lambda_i \nabla C_{ij}$$<br>$$p_i’ &#x3D; p_i + \Delta p_i$$<br>$$p_j’ &#x3D; p_j - \Delta p_i$$</p>
+<p><img src="/2024/07/23/CS5310-final-project/12_4.gif" srcset="/img/loading.gif" lazyload alt="1000 particles"></p>
+<p>The result is as expected, but for the bottom example there is a problem, the two points merge together when compressed to the extreme, the reason for this problem is because the bounding box detection I did not set as a constraint, because the constraint is to fine-tune the points, but in any case it should not go beyond the bouding box, here you can conditionally check the constraints, but it is too complex I’ll leave it here for now.</p>
+<p><img src="/2024/07/23/CS5310-final-project/12_7.gif" srcset="/img/loading.gif" lazyload alt="10000 particles"><br>A horizontal force was added at the beginning to randomise the whole system a bit. It’s still not relastic , I decided to add Phong shading and alpha channel first, then deal with the other constraints.</p>
+<h2 id="Phong-Shading"><a href="#Phong-Shading" class="headerlink" title="Phong Shading"></a>Phong Shading</h2><p><img src="/2024/07/23/CS5310-final-project/13_1.gif" srcset="/img/loading.gif" lazyload alt="Phong shading"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] </p>
 
                 
