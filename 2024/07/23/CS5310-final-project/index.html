@@ -102,8 +102,9 @@
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_4.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_7.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/13_2.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_1.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-10T08:43:42.701Z">
+<meta property="article:modified_time" content="2024-08-10T10:27:30.497Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/1_1.jpg">
@@ -303,7 +304,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          978 words
+          980 words
         
       </span>
     
@@ -844,8 +845,9 @@
 <p><img src="/2024/07/23/CS5310-final-project/12_4.gif" srcset="/img/loading.gif" lazyload alt="1000 particles"></p>
 <p>The result is as expected, but for the bottom example there is a problem, the two points merge together when compressed to the extreme, the reason for this problem is because the bounding box detection I did not set as a constraint, because the constraint is to fine-tune the points, but in any case it should not go beyond the bouding box, here you can conditionally check the constraints, but it is too complex I’ll leave it here for now.</p>
 <p><img src="/2024/07/23/CS5310-final-project/12_7.gif" srcset="/img/loading.gif" lazyload alt="10000 particles"><br>A horizontal force was added at the beginning to randomise the whole system a bit. It’s still not relastic , I decided to add Phong shading and alpha channel first, then deal with the other constraints.</p>
-<h2 id="Phong-Shading"><a href="#Phong-Shading" class="headerlink" title="Phong Shading"></a>Phong Shading</h2><p>Below is the water surface I simulated with phong shading, you can see that there are obvious highlights and diffuse area, but one thing is strange, I tried to give the ks as big as possible as the water surface should be, but the result is very strange, diffuse and specular features are very strong in my code, and I ended up generating a light ambient light &#x3D; diffuse&#x3D;specular, R &#x3D; 100 and got relatively good results.</p>
+<h2 id="13-Phong-Shading"><a href="#13-Phong-Shading" class="headerlink" title="13.  Phong Shading"></a>13.  Phong Shading</h2><p>Below is the water surface I simulated with phong shading, you can see that there are obvious highlights and diffuse area, but one thing is strange, I tried to give the ks as big as possible as the water surface should be, but the result is very strange, diffuse and specular features are very strong in my code, and I ended up generating a light ambient light &#x3D; diffuse&#x3D;specular, R &#x3D; 100 and got relatively good results.</p>
 <p><img src="/2024/07/23/CS5310-final-project/13_2.gif" srcset="/img/loading.gif" lazyload alt="Phong shading with ka = 0.6; kd = 0.2; ks = 0.8; R = 100"></p>
+<h2 id="14-Alpha-Channel"><a href="#14-Alpha-Channel" class="headerlink" title="14. Alpha Channel"></a>14. Alpha Channel</h2><p><img src="/2024/07/23/CS5310-final-project/14_1.gif" srcset="/img/loading.gif" lazyload alt="Alpha Channel; kd = 0.2; ks = 0.8; R = 100"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] </p>
 
                 
