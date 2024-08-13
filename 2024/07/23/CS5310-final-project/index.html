@@ -96,22 +96,30 @@
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/10_3.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/11_1.jpg">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/11_2.jpg">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/13_2.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_1.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_2.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_6.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_3.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_4.jpg">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_2.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_1.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_2.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_3.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_5.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_4.gif">
 <meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/12_7.gif">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/13_2.gif">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_1.gif">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_2.gif">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/14_6.gif">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_1.jpg">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_3.gif">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_4.jpg">
-<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_2.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_12.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_5.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/CS5310-final-project/15_6.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/CS5310-final-project/15_7.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/CS5310-final-project/15_8.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/CS5310-final-project/15_9.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/CS5310-final-project/15_10.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/CS5310-final-project/15_11.gif">
+<meta property="og:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_9.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-12T08:15:53.235Z">
+<meta property="article:modified_time" content="2024-08-13T14:02:11.698Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2024/07/23/CS5310-final-project/15_2.gif">
@@ -311,7 +319,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          993 words
+          1.1k words
         
       </span>
     
@@ -837,7 +845,24 @@
 </div>
 
 <p>At the beginning, I didn’t want to use linear interpolation to compute the skybox because I thought this method would be very time-consuming. In my opinion, the correct approach should be to get the transformation matrix for each surface of the skybox, then apply this matrix to the transformation after reading the image, and map it to each face. This would greatly reduce the computational load since it wouldn’t require operations like fillScan. However, I eventually gave up because it was too complicated. I needed to record all boundary conditions and calculate the matrix for each surface. So, I ended up using the simplest method: directly applying the texture to each surface.</p>
-<h1 id="12-Particle"><a href="#12-Particle" class="headerlink" title="12. Particle"></a>12. Particle</h1><p>There’s a very famous paper to simulate water : <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">Position Based Fluids</a>. I really want to imply this paper, but after thoroughly understanding what I need to do, I think I’ll need half a month to a month, but I’ve only got several days, so I’m going to implement an basic algorithm of this paper: PBD.</p>
+<h1 id="12-Phong-Shading"><a href="#12-Phong-Shading" class="headerlink" title="12.  Phong Shading"></a>12.  Phong Shading</h1><p>Below is the water surface I simulated with phong shading, you can see that there are obvious highlights and diffuse area, but one thing is strange, I tried to give the ks as big as possible as the water surface should be, but the result is very strange, diffuse and specular features are very strong in my code, and I ended up generating a light ambient light &#x3D; diffuse&#x3D;specular, R &#x3D; 100 and got relatively good results.</p>
+<p><img src="/2024/07/23/CS5310-final-project/13_2.gif" srcset="/img/loading.gif" lazyload alt="Phong shading with ka = 0.6; kd = 0.2; ks = 0.8; R = 100"></p>
+<h1 id="13-Alpha-Channel"><a href="#13-Alpha-Channel" class="headerlink" title="13. Alpha Channel"></a>13. Alpha Channel</h1><p><img src="/2024/07/23/CS5310-final-project/14_1.gif" srcset="/img/loading.gif" lazyload alt="Alpha Channel; kd = 0.2; ks = 0.8; R = 100"></p>
+<p>Then I combine all the staff I have right now together, here is the result </p>
+<p><img src="/2024/07/23/CS5310-final-project/14_2.gif" srcset="/img/loading.gif" lazyload alt="Alpha + Texture + Particle + Phong"></p>
+<!-- ![Alpha + Texture + Particle + Phong](/2024/07/23/CS5310-final-project/14_3.gif) -->
+<p>I wanna add rain right now !</p>
+<!-- ![Alpha + Texture + Particle + Phong](/2024/07/23/CS5310-final-project/14_4.gif) -->
+
+
+<p><img src="/2024/07/23/CS5310-final-project/14_6.gif" srcset="/img/loading.gif" lazyload alt="Alpha + Texture + Particle + Phong"></p>
+<h1 id="14-Fog"><a href="#14-Fog" class="headerlink" title="14. Fog"></a>14. Fog</h1><p>I initially wanted to create fog over the water surface, but I realized that without using volumetric rendering or having shadow volumes, the result was quite poor. I tried using Perlin noise to achieve this, but the outcome was very disappointing. So, I changed my approach and decided to generate clouds instead. The fake result I obtained is as follows.</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_3.gif" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
+<p>The result is pretty bad,, I decide not to use it…</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_4.jpg" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
+<p>Here is my final result</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_2.gif" srcset="/img/loading.gif" lazyload alt="My final result before PBD"></p>
+<h1 id="15-PBD"><a href="#15-PBD" class="headerlink" title="15. PBD"></a>15. PBD</h1><p>There’s a very famous paper to simulate water : <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">Position Based Fluids</a>. I really want to imply this paper, but after thoroughly understanding what I need to do, I think I’ll need half a month to a month, but I’ve only got several days, so I’m going to implement an basic algorithm of this paper: PBD.</p>
 <h2 id="Force"><a href="#Force" class="headerlink" title="Force"></a>Force</h2><p>Build a Particle and give a Gravity to it, the particle only have several faces as you see, this is because I wanna to make my program as fast as possible.</p>
 <p><img src="/2024/07/23/CS5310-final-project/12_1.gif" srcset="/img/loading.gif" lazyload alt="Partticle + Gravity = -9.8 "></p>
 <p>One of the most basic things about PBD is that it <code>relies on position</code> to calculate acceleration and velocity, rather than the traditional reliance on acceleration and velocity to find position. So here is the structure of my particle.</p>
@@ -848,28 +873,40 @@
 <p><img src="/2024/07/23/CS5310-final-project/12_3.gif" srcset="/img/loading.gif" lazyload alt="Extra Force.x = -2 ; Gravity.y = -9.8 ; damping = 0.8 "></p>
 <p><img src="/2024/07/23/CS5310-final-project/12_5.gif" srcset="/img/loading.gif" lazyload alt="1000 particles"></p>
 <p>After adding 1000 the particles to the system, we found that they can not detect each other, which menas there is no collison in the sytstem. But here is the point, how to detected the particles around each particles ? We need a new structure : Grid[][][], we put all the particles in the gird, if we wanna to find the neighbour particles around the target particles, just get all the particles from grids which around the target particles. After that, we need a new method <code>distance constraint</code> to find how to deal with the collsion by a eaiser way.</p>
-<h2 id="Constraint"><a href="#Constraint" class="headerlink" title="Constraint"></a>Constraint</h2><p>The most simple constraint which is <code>distance constraint</code>, my understanding is that we need to make sure that each point is as far as possible to where we expect it to be, and if that doesn’t work then fine-tune until the whole system is close to stable.</p>
+<h2 id="Distance-Constraint"><a href="#Distance-Constraint" class="headerlink" title="Distance Constraint"></a>Distance Constraint</h2><p>The most simple constraint which is <code>distance constraint</code>, my understanding is that we need to make sure that each point is as far as possible to where we expect it to be, and if that doesn’t work then fine-tune until the whole system is close to stable.</p>
 <p>$$\nabla C_{ij} &#x3D; \frac{p_i - p_j}{| p_i - p_j |}t$$<br>$$\lambda_i &#x3D; \frac{-C_{ij}}{\sum_k (\nabla C_{ik})^2}$$<br>$$\Delta p_i &#x3D; \lambda_i \nabla C_{ij}$$<br>$$p_i’ &#x3D; p_i + \Delta p_i$$<br>$$p_j’ &#x3D; p_j - \Delta p_i$$</p>
 <p><img src="/2024/07/23/CS5310-final-project/12_4.gif" srcset="/img/loading.gif" lazyload alt="1000 particles"></p>
 <p>The result is as expected, but for the bottom example there is a problem, the two points merge together when compressed to the extreme, the reason for this problem is because the bounding box detection I did not set as a constraint, because the constraint is to fine-tune the points, but in any case it should not go beyond the bouding box, here you can conditionally check the constraints, but it is too complex I’ll leave it here for now.</p>
-<p><img src="/2024/07/23/CS5310-final-project/12_7.gif" srcset="/img/loading.gif" lazyload alt="10000 particles"><br>A horizontal force was added at the beginning to randomise the whole system a bit. It’s still not relastic , I decided to add Phong shading and alpha channel first, then deal with the other constraints.</p>
-<h1 id="13-Phong-Shading"><a href="#13-Phong-Shading" class="headerlink" title="13.  Phong Shading"></a>13.  Phong Shading</h1><p>Below is the water surface I simulated with phong shading, you can see that there are obvious highlights and diffuse area, but one thing is strange, I tried to give the ks as big as possible as the water surface should be, but the result is very strange, diffuse and specular features are very strong in my code, and I ended up generating a light ambient light &#x3D; diffuse&#x3D;specular, R &#x3D; 100 and got relatively good results.</p>
-<p><img src="/2024/07/23/CS5310-final-project/13_2.gif" srcset="/img/loading.gif" lazyload alt="Phong shading with ka = 0.6; kd = 0.2; ks = 0.8; R = 100"></p>
-<h1 id="14-Alpha-Channel"><a href="#14-Alpha-Channel" class="headerlink" title="14. Alpha Channel"></a>14. Alpha Channel</h1><p><img src="/2024/07/23/CS5310-final-project/14_1.gif" srcset="/img/loading.gif" lazyload alt="Alpha Channel; kd = 0.2; ks = 0.8; R = 100"></p>
-<p>Then I combine all the staff I have right now together, here is the result </p>
-<p><img src="/2024/07/23/CS5310-final-project/14_2.gif" srcset="/img/loading.gif" lazyload alt="Alpha + Texture + Particle + Phong"></p>
-<!-- ![Alpha + Texture + Particle + Phong](/2024/07/23/CS5310-final-project/14_3.gif) -->
-<p>I wanna add rain right now !</p>
-<!-- ![Alpha + Texture + Particle + Phong](/2024/07/23/CS5310-final-project/14_4.gif) -->
+<p><img src="/2024/07/23/CS5310-final-project/12_7.gif" srcset="/img/loading.gif" lazyload alt="10000 particles my first result"></p>
+<p>However, the results were unsatisfactory. After investigating, I identified three key issues:</p>
+<ol>
+<li><p><strong>Precision Issues</strong>: The precision of my calculations was insufficient. With a particle radius of 0.03, using floats resulted in significant errors when particles experienced even slight offsets. To address this, I switched to using double precision.</p>
+</li>
+<li><p><strong>Constraint Accumulation Method</strong>: My initial approach to constraint distance accumulation was flawed. According to [Müller et al. 2006], the system should be solved using an iterative method similar to Gauss-Seidel for linear equations. In this method, once a constraint is calculated, the particle positions are immediately corrected, and these updated positions are then used in subsequent constraint mappings. While this approach led to faster convergence, the results were still unsatisfactory due to insufficient accuracy. My initial crude method exacerbated these issues, so I introduced a new variable, <code>buffer_position</code>, to store the corrected positions before applying them.</p>
+</li>
+<li><p><strong>Time Step (dt) Problems</strong>: The choice of time step (<code>dt</code>) was problematic. Since the system runs on a single thread, I had increased <code>dt</code> for convenience, which led to an excessively large search range. This caused too many particles to be affected simultaneously, increasing the likelihood of overlapping positions and, consequently, inaccurate results.</p>
+</li>
+</ol>
+<p>I addressed the issues mentioned above by removing all forces and increasing the distance between points, effectively simulating a situation similar to water droplets in space. Now, the results align with expectations: the distance between each point remains constant, and the overall system maintains precision, meeting our intended outcomes.</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_12.gif" srcset="/img/loading.gif" lazyload alt="Delete all force, only keep the distance constriant"></p>
+<p>And it’s really cool! When we reverse the constraint force—meaning that when points detect an incorrect distance, they move closer together—we observe the formation of distinct small clusters, as shown in the image below. Upon closer inspection, you’ll notice that each search area forms its own cluster. Each grid in the 3D space seems to gather into a center of mass, almost like gravitational attraction.And it’s really cool! When we reverse the constraint force—meaning that when points detect an incorrect distance, they move closer together—we observe the formation of distinct small clusters, as shown in the image below. Upon closer inspection, you’ll notice that each search area forms its own cluster. Each grid in the 3D space seems to gather into a center of mass, almost like gravitational attraction.</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_5.gif" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
+<p>I generated a series of images, with the one I’m most satisfied with at the end. There’s still room for optimization, but the main reason the results aren’t perfect is due to the limitations of single-threading. I couldn’t significantly reduce the time step <code>dt</code> and <code>constraint strength</code> to achieve a flawless outcome. However, the image below represents the best result I could achieve with my current single-threading setup.</p>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="CS5310-final-project/15_6.gif" srcset="/img/loading.gif" lazyload title="A regular image" width="400px" height="200px">
+  <img src="CS5310-final-project/15_7.gif" srcset="/img/loading.gif" lazyload title="A regular image" width="400px" height="200px">
+  <img src="CS5310-final-project/15_8.gif" srcset="/img/loading.gif" lazyload title="A regular image" width="400px" height="200px">
+</div>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="CS5310-final-project/15_9.gif" srcset="/img/loading.gif" lazyload title="A regular image" width="400px" height="200px">
+  <img src="CS5310-final-project/15_10.gif" srcset="/img/loading.gif" lazyload title="A regular image" width="400px" height="200px">
+  <img src="CS5310-final-project/15_11.gif" srcset="/img/loading.gif" lazyload title="A regular image" width="400px" height="200px">
+</div>
 
 
-<p><img src="/2024/07/23/CS5310-final-project/14_6.gif" srcset="/img/loading.gif" lazyload alt="Alpha + Texture + Particle + Phong"></p>
-<h1 id="15-Fog"><a href="#15-Fog" class="headerlink" title="15. Fog"></a>15. Fog</h1><p><img src="/2024/07/23/CS5310-final-project/15_1.jpg" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
-<p>I initially wanted to create fog over the water surface, but I realized that without using volumetric rendering or having shadow volumes, the result was quite poor. I tried using Perlin noise to achieve this, but the outcome was very disappointing. So, I changed my approach and decided to generate clouds instead. The fake result I obtained is as follows.</p>
-<p><img src="/2024/07/23/CS5310-final-project/15_3.gif" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
-<p>The result is pretty bad,, I decide not to use it…</p>
-<p><img src="/2024/07/23/CS5310-final-project/15_4.jpg" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
-<p><img src="/2024/07/23/CS5310-final-project/15_2.gif" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
+<p>The result above is still bad , but which is the best result I got. </p>
+<p><img src="/2024/07/23/CS5310-final-project/15_9.gif" srcset="/img/loading.gif" lazyload alt="The Best result I use Gravity + Distance Constrant"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2]<br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] </p>
 
                 
