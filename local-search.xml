@@ -34,7 +34,7 @@
     <link href="/2023/06/20/UE5_source_code_analysis/"/>
     <url>/2023/06/20/UE5_source_code_analysis/</url>
     
-    <content type="html"><![CDATA[<h1 id="Realistic-Rendering-by-Mitsuba3"><a href="#Realistic-Rendering-by-Mitsuba3" class="headerlink" title="Realistic Rendering by Mitsuba3"></a>Realistic Rendering by Mitsuba3</h1><p>Based on mitsuba3 and Irawan’s cloth model, I add a new pattern of cloth by data drived, which used multi highlights in one yarn, here is the result.</p><p><img src="/UE_source_code_analysis/3.jpeg"><br><img src="/UE_source_code_analysis/2.jpeg"><br><img src="/UE_source_code_analysis/4.jpeg"><br><img src="/UE_source_code_analysis/5.jpeg"><br><img src="/UE_source_code_analysis/1.jpeg"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="Realistic-Rendering-by-Mitsuba3"><a href="#Realistic-Rendering-by-Mitsuba3" class="headerlink" title="Realistic Rendering by Mitsuba3"></a>Realistic Rendering by Mitsuba3</h1><p>Based on mitsuba3 and Irawan’s cloth model, I add a new pattern of cloth by data drived, which used multi highlights in one yarn, here is the result.</p><p><img src="/2023/06/20/UE5_source_code_analysis/3.jpeg"><br><img src="/2023/06/20/UE5_source_code_analysis/2.jpeg"><br><img src="/2023/06/20/UE5_source_code_analysis/4.jpeg"><br><img src="/2023/06/20/UE5_source_code_analysis/5.jpeg"><br><img src="/2023/06/20/UE5_source_code_analysis/1.jpeg"></p>]]></content>
     
     
     
