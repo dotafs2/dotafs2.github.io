@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://dotafs.com/cover2.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-13T15:02:53.189Z">
+<meta property="article:modified_time" content="2024-08-14T04:11:00.140Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/cover2.gif">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          1.3k words
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          10 mins
+          11 mins
         
       </span>
     
@@ -762,7 +762,8 @@
 
 
 <p><img src="/2024/07/23/CS5310-final-project/14_6.gif" srcset="/img/loading.gif" lazyload alt="Alpha + Texture + Particle + Phong"></p>
-<h1 id="14-Fog"><a href="#14-Fog" class="headerlink" title="14. Fog"></a>14. Fog</h1><p>I initially wanted to create fog over the water surface, but I realized that without using volumetric rendering or having shadow volumes, the result was quite poor. I tried using Perlin noise to achieve this, but the outcome was very disappointing. So, I changed my approach and decided to generate clouds instead. The fake result I obtained is as follows.</p>
+<h1 id="14-Particle"><a href="#14-Particle" class="headerlink" title="14. Particle"></a>14. Particle</h1><p>s</p>
+<p>I initially wanted to create fog over the water surface, but I realized that without using volumetric rendering or having shadow volumes, the result was quite poor. I tried using Perlin noise to achieve this, but the outcome was very disappointing. So, I changed my approach and decided to generate clouds instead. The fake result I obtained is as follows.</p>
 <p><img src="/2024/07/23/CS5310-final-project/15_3.gif" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
 <p>The result is pretty bad,, I decide not to use it…</p>
 <p><img src="/2024/07/23/CS5310-final-project/15_4.jpg" srcset="/img/loading.gif" lazyload alt="Random the fog position"></p>
@@ -813,7 +814,31 @@
 
 <p>The result above is still bad , but which is the best result I got. </p>
 <p><img src="/2024/07/23/CS5310-final-project/15_9.gif" srcset="/img/loading.gif" lazyload alt="The Best result I use Gravity + Distance Constrant"></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2] <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">https://mmacklin.com/pbf_sig_preprint.pdf</a><br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] <a target="_blank" rel="noopener" href="https://blog.csdn.net/knight_lyh/article/details/56282584">https://blog.csdn.net/knight_lyh/article/details/56282584</a><br>[5] <a target="_blank" rel="noopener" href="https://northeastern.instructure.com/courses/180758">https://northeastern.instructure.com/courses/180758</a><br>[6] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36383623/article/details/104872438">https://blog.csdn.net/qq_36383623/article/details/104872438</a>  </p>
+<h2 id="PBF"><a href="#PBF" class="headerlink" title="PBF"></a>PBF</h2><h3 id="Incompressibility"><a href="#Incompressibility" class="headerlink" title="Incompressibility"></a>Incompressibility</h3><p>The $\textbf{Poly6 kernel}$ is defined as:</p>
+<p>$$W_{\text{poly6}}(r, h) &#x3D; \frac{315}{64\pi h^9} \cdot (h^2 - r^2)^3$$</p>
+<p>where:</p>
+<ul>
+<li>( r ) is the distance between two particles.</li>
+<li>( h ) is the smoothing length or influence radius.</li>
+</ul>
+<p>For $( 0 \leq r \leq h ):<br>W_{\text{poly6}}(r, h) &#x3D; \frac{315}{64\pi h^9} \cdot (h^2 - r^2)^3$</p>
+<p>For $( r &gt; h ):W_{\text{poly6}}(r, h) &#x3D; 0$</p>
+<p>The $\textbf{Spiky kernel}$ is defined as:  </p>
+<p>$$W_{\text{spiky}}(r, h) &#x3D; \frac{15}{\pi h^6} \cdot (h - r)^3$$</p>
+<p>where:</p>
+<ul>
+<li>( r ) is the distance between two particles.</li>
+<li>( h ) is the searching range in our system which is the neighbour range.</li>
+</ul>
+<p>For $ ( 0 \leq r \leq h ):<br>W_{\text{spiky}}(r, h) &#x3D; \frac{15}{\pi h^6} \cdot (h - r)^3<br>$</p>
+<p>For $( r &gt; h): W_{\text{spiky}}(r, h) &#x3D; 0$</p>
+<p>Using the two kernels to calculate the expected density and gravidence of density. Here is the lamada of each particles. Then another for loop to calculate the buffer distances.</p>
+<p>$$\lambda_i &#x3D; -\frac{C_i(p_1, \dots, p_n)}{\sum_k |\nabla_{p_k} C_i|^2 + \epsilon}$$</p>
+<p>$$\Delta p_{i} &#x3D; \frac{1}{\text{restDistance}} \sum_j (\lambda_i + \lambda_j) \nabla W(p_i - p_j, h)$$</p>
+<p>Where $\nabla W$ is the $\textbf{Spiky Kernel}$. </p>
+<p>Better results were obtained based on density rather than distance. Even if our particles were denser they wouldn’t overlap each other.</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_14.gif" srcset="/img/loading.gif" lazyload alt="The Best result I use Gravity + Distance Constrant"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md">https://github.com/QianMo/Game-Programmer-Study-Notes/blob/master/Content/%E7%9C%9F%E5%AE%9E%E6%84%9F%E6%B0%B4%E4%BD%93%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/README.md</a><br>[2] <a target="_blank" rel="noopener" href="https://northeastern.instructure.com/courses/180758">https://northeastern.instructure.com/courses/180758</a><br>[3] <a target="_blank" rel="noopener" href="https://wikischool.org/divided_light">https://wikischool.org/divided_light</a><br>[4] <a target="_blank" rel="noopener" href="https://blog.csdn.net/knight_lyh/article/details/56282584">https://blog.csdn.net/knight_lyh/article/details/56282584</a><br>[5] <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">https://mmacklin.com/pbf_sig_preprint.pdf</a><br>[6] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36383623/article/details/104872438">https://blog.csdn.net/qq_36383623/article/details/104872438</a><br>[7] <a target="_blank" rel="noopener" href="https://www.cs.cmu.edu/~scoros/cs15467-s16/lectures/11-fluids2.pdf">https://www.cs.cmu.edu/~scoros/cs15467-s16/lectures/11-fluids2.pdf</a><br>[8] <a target="_blank" rel="noopener" href="http://jamesjia.com/cs184-fluidsim#spiky">http://jamesjia.com/cs184-fluidsim#spiky</a>  </p>
 
                 
               </div>
