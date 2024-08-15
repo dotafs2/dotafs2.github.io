@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Physically Based Rendering with DirectX 12</title>
+    <link href="/2024/08/15/Physically-Based-Rendering-with-DirectX-12/"/>
+    <url>/2024/08/15/Physically-Based-Rendering-with-DirectX-12/</url>
+    
+    <content type="html"><![CDATA[<p>After building a water simulation using PBF (Position-Based Fluids) with C, I realized that the single-threaded implementation didn’t perform as well as I expected. As a result, I’ve decided to rebuild the PBF simulation using DirectX 12. This time, I’m not only focusing on PBF but also planning to explore and utilize all the tools I’m interested in PBR.</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CS5310_final_project</title>
     <link href="/2024/07/23/CS5310-final-project/"/>
     <url>/2024/07/23/CS5310-final-project/</url>
