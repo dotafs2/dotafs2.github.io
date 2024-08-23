@@ -16,12 +16,12 @@
   <meta name="author" content="DOTAFS">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hello WorldDescribe the process of drawing a triangle, something similar to printf(“Hello World!”) in D3D. step 1: vertex and input layout First thing is create a custom vertex structure. 1234567struc">
+    <meta name="description" content="My learning path of D3D12, aim to develop my own engine.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="D3D12_learning_notes">
 <meta property="og:url" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/index.html">
 <meta property="og:site_name" content="FS">
-<meta property="og:description" content="Hello WorldDescribe the process of drawing a triangle, something similar to printf(“Hello World!”) in D3D. step 1: vertex and input layout First thing is create a custom vertex structure. 1234567struc">
+<meta property="og:description" content="My learning path of D3D12, aim to develop my own engine.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/3.png">
 <meta property="og:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/6.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/2.png">
 <meta property="og:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/5.png">
 <meta property="article:published_time" content="2023-10-18T03:47:10.000Z">
-<meta property="article:modified_time" content="2024-08-23T02:54:49.613Z">
+<meta property="article:modified_time" content="2024-08-23T06:23:34.497Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/3.png">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          953 words
+          959 words
         
       </span>
     
@@ -330,6 +330,11 @@
 <ol start="2">
 <li>After create vertex buffer and view, we need to combine them.</li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ID3D12GraphicsCommandList::IASetVertexBuffers</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">UINT StartSlot,</span></span><br><span class="hljs-params"><span class="hljs-function">UINT NumBuffers,</span></span><br><span class="hljs-params"><span class="hljs-function"><span class="hljs-type">const</span> D3D12_VERTEX_BUFFER_VIEW *pViews)</span></span>;<br></code></pre></td></tr></table></figure>
+
+
+
+
 <h1 id="graphics-pipeline-in-DirectX-12"><a href="#graphics-pipeline-in-DirectX-12" class="headerlink" title="graphics pipeline in DirectX 12."></a>graphics pipeline in DirectX 12.</h1><p><img src="/2023/10/18/D3D12-learning-notes/3.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>Fixed-function stages (blue): cannot change how they process data, but can configure them using the DirectX 12 API. Such as imachines in a factory.</li>
