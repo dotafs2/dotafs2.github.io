@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/2.png">
 <meta property="og:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/5.png">
 <meta property="article:published_time" content="2023-10-18T03:47:10.000Z">
-<meta property="article:modified_time" content="2024-08-23T06:23:34.497Z">
+<meta property="article:modified_time" content="2024-08-27T08:40:26.970Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2023/10/18/D3D12-learning-notes/3.png">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          959 words
+          1k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          8 mins
+          9 mins
         
       </span>
     
@@ -285,7 +285,7 @@
                 
                 <h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>Describe the process of drawing a triangle, something similar to printf(“Hello World!”) in D3D.</p>
 <h2 id="step-1-vertex-and-input-layout"><a href="#step-1-vertex-and-input-layout" class="headerlink" title="step 1: vertex and input layout"></a>step 1: vertex and input layout</h2><ol>
-<li><p>First thing is create a custom vertex structure.</p>
+<li><p>First thing is to create a custom vertex structure.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Vertex</span><br>&#123;<br>XMFLOAT3 Pos;<br>XMFLOAT3 Normal;<br>XMFLOAT2 Tex0;<br>XMFLOAT2 Tex1;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>After that, we need to give D3D a description, to let D3D know what the vertex is doing with each components (ep. Pos, Normal), which is <code>D3D12_INPUT_LAYOUT_DESC</code>.</p>
@@ -320,7 +320,7 @@
 
 
 <h3 id="bind-the-buffer-to-pipeline"><a href="#bind-the-buffer-to-pipeline" class="headerlink" title="bind the buffer to pipeline"></a>bind the buffer to pipeline</h3><ol>
-<li>We need a <code>vertex buffer view</code> to vertex buffer resource.<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">D3D12_VERTEX_BUFFER_VIEW</span><br>&#123;<br>D3D12_GPU_VIRTUAL_ADDRESS BufferLocation;<br>UINT SizeInBytes;<br>UINT StrideInBytes;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>We need a <code>vertex buffer view</code> to find the vertex buffer resource.<br>In my understanding, this is something like pointer, used for us to find the position and size of vertex buffer when we need.<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">D3D12_VERTEX_BUFFER_VIEW</span><br>&#123;<br>D3D12_GPU_VIRTUAL_ADDRESS BufferLocation;<br>UINT SizeInBytes;<br>UINT StrideInBytes;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ol>
 <ul>
 <li>BufferLocation: Virtual address (such as &amp; in c) of the vertex buffer we wanna to view</li>
@@ -328,10 +328,17 @@
 <li>StrideInBytes: The size of each vertex in bytes.</li>
 </ul>
 <ol start="2">
-<li>After create vertex buffer and view, we need to combine them.</li>
+<li>After create vertex buffer and view, use function below to process the whole steps.</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ID3D12GraphicsCommandList::IASetVertexBuffers</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">UINT StartSlot,</span></span><br><span class="hljs-params"><span class="hljs-function">UINT NumBuffers,</span></span><br><span class="hljs-params"><span class="hljs-function"><span class="hljs-type">const</span> D3D12_VERTEX_BUFFER_VIEW *pViews)</span></span>;<br></code></pre></td></tr></table></figure>
 
+<ol start="3">
+<li>The step below does not mean we already draw them , just put the resource to the target slot, <code>DrawInstance</code> is the function to the draw step.<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ID3D12CommandList::DrawInstanced</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">UINT VertexCountPerInstance,</span></span><br><span class="hljs-params"><span class="hljs-function">UINT InstanceCount,</span></span><br><span class="hljs-params"><span class="hljs-function">UINT StartVertexLocation,</span></span><br><span class="hljs-params"><span class="hljs-function">UINT StartInstanceLocation)</span></span>;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="step-3-constant-buffer"><a href="#step-3-constant-buffer" class="headerlink" title="step 3: constant buffer"></a>step 3: constant buffer</h2><p>It’s a type of GPU resource: <code>ID3D12Resource</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++">cbuffer cbPerObject : <span class="hljs-built_in">register</span>(b0)<br>&#123;<br>float4x4 gWorldViewProj;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ObjectConstants</span><br>&#123;<br>DirectX::XMFLOAT4X4 WorldViewProj = MathHelper::<span class="hljs-built_in">Identity4x4</span>();<br>&#125;;<br>UINT elementByteSize = d3dUtil::<span class="hljs-built_in">CalcConstantBufferByteSize</span>(<span class="hljs-built_in">sizeof</span>(Objec<br>tConstants));<br>ComPtr&lt;ID3D12Resource&gt; mUploadCBuffer;<br>device-&gt;<span class="hljs-built_in">CreateCommittedResource</span>(<br>&amp;<span class="hljs-built_in">CD3DX12_HEAP_PROPERTIES</span>(D3D12_HEAP_TYPE_UPLOAD),<br>D3D12_HEAP_FLAG_NONE,<br>&amp;CD3DX12_RESOURCE_DESC::<span class="hljs-built_in">Buffer</span>(mElementByteSize * NumElements),<br>D3D12_RESOURCE_STATE_GENERIC_READ,<br><span class="hljs-literal">nullptr</span>,<br><span class="hljs-built_in">IID_PPV_ARGS</span>(&amp;mUploadCBuffer));<br></code></pre></td></tr></table></figure>
 
 
 
