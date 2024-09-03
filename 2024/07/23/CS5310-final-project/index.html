@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://dotafs.com/cover2.gif">
 <meta property="article:published_time" content="2024-07-23T08:38:36.000Z">
-<meta property="article:modified_time" content="2024-08-26T08:21:17.374Z">
+<meta property="article:modified_time" content="2024-09-03T08:31:10.574Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/cover2.gif">
@@ -236,7 +236,7 @@
         
         
         
-          11 mins
+          12 mins
         
       </span>
     
@@ -278,8 +278,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h1><p><img src="/2024/07/23/CS5310-final-project/15_2.gif" srcset="/img/loading.gif" lazyload alt="Water surface simluation + Rainfall"></p>
-<p><img src="/2024/07/23/CS5310-final-project/15_9.gif" srcset="/img/loading.gif" lazyload alt="PBD by distance constriant"></p>
+                <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Here is a rendering engine that I have completely hand-written in C. Everything is implemented manually by me, from matrix addition and subtraction, memory allocation, rasterization, z-buffer, alpha test, shadow methods, Phong shading, particle systems, importing materials, importing OBJ files, Water Simulation, etc.. </p>
+<h2 id="Water-Surface-Simulation"><a href="#Water-Surface-Simulation" class="headerlink" title="Water Surface Simulation"></a>Water Surface Simulation</h2><p><img src="/2024/07/23/CS5310-final-project/15_2.gif" srcset="/img/loading.gif" lazyload alt="Water surface simluation + Rainfall"></p>
+<ul>
+<li>Phong Shading.</li>
+<li>Multiple cosine waves are used to simulate the water surface.</li>
+<li>A grayscale texture is calculated for alpha testing.</li>
+<li>dynamic particles are simulated to represent water droplets.</li>
+</ul>
+<h2 id="Phyical-Based-Water-Simulation"><a href="#Phyical-Based-Water-Simulation" class="headerlink" title="Phyical Based Water Simulation"></a>Phyical Based Water Simulation</h2><p><img src="/2024/07/23/CS5310-final-project/15_9.gif" srcset="/img/loading.gif" lazyload alt="PBD by distance constriant"></p>
+<p>Based on this paper to simulate water : <a target="_blank" rel="noopener" href="https://mmacklin.com/pbf_sig_preprint.pdf">Position Based Fluids</a>.</p>
+<p><img src="/2024/07/23/CS5310-final-project/15_13.gif" srcset="/img/loading.gif" lazyload alt="1000 particles with PBF"></p>
 <h1 id="1-Image"><a href="#1-Image" class="headerlink" title="1. Image"></a>1. Image</h1><h2 id="Do-something-interesting-to-the-image"><a href="#Do-something-interesting-to-the-image" class="headerlink" title="Do something interesting to the image"></a>Do something interesting to the image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">../bin/lab1 geraniums.ppm lab1.ppm<br></code></pre></td></tr></table></figure>
 <p>First, I changed the order of green and red to try to output only the leaves, but there was some noise. To fix this issue, two ideas came to mind:</p>
 <ol>
@@ -585,7 +594,7 @@
 </div>
 
 
-<h2 id="Polygon-Transformation-and-Rendering-Process"><a href="#Polygon-Transformation-and-Rendering-Process" class="headerlink" title="Polygon Transformation and Rendering Process"></a>Polygon Transformation and Rendering Process</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>The process of transforming and rendering polygons is the bug I solved for most of the time. The key problem is in the order of components involved are the Local Transformation Matrix (LTM), Global Transformation Matrix (GTM), and View Transformation Matrix (VTM).</p>
+<h2 id="Polygon-Transformation-and-Rendering-Process"><a href="#Polygon-Transformation-and-Rendering-Process" class="headerlink" title="Polygon Transformation and Rendering Process"></a>Polygon Transformation and Rendering Process</h2><h3 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h3><p>The process of transforming and rendering polygons is the bug I solved for most of the time. The key problem is in the order of components involved are the Local Transformation Matrix (LTM), Global Transformation Matrix (GTM), and View Transformation Matrix (VTM).</p>
 <h3 id="Transformation-Matrices"><a href="#Transformation-Matrices" class="headerlink" title="Transformation Matrices"></a>Transformation Matrices</h3><ol>
 <li><p><strong>LTM (Local Transformation Matrix)</strong>:</p>
 <ul>
