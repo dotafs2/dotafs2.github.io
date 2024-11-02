@@ -18,7 +18,7 @@
   
     <meta name="description" content="有感最开始学图形，全学的概念，可以见我2022年的笔记在dotafs.com，现在回想起来觉得曼大图形学的课程不是很适合我，过多的高级理念比如LOD，快速傅立叶模拟水等，并没有任何代码和实操，让我其实很多概念都浮于理解，最开始我对图形的认知其实全是源自于论文中的brdf，bsdf，bsss…sssdf，里面的各个参数我只知道公式写的是啥，完全不理解，只是浮于点对点的定义，跟背公式没啥区别，无法理解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="interview script">
+<meta property="og:title" content="my general notes">
 <meta property="og:url" content="https://dotafs.com/2022/09/06/interview-script/index.html">
 <meta property="og:site_name" content="FS">
 <meta property="og:description" content="有感最开始学图形，全学的概念，可以见我2022年的笔记在dotafs.com，现在回想起来觉得曼大图形学的课程不是很适合我，过多的高级理念比如LOD，快速傅立叶模拟水等，并没有任何代码和实操，让我其实很多概念都浮于理解，最开始我对图形的认知其实全是源自于论文中的brdf，bsdf，bsss…sssdf，里面的各个参数我只知道公式写的是啥，完全不理解，只是浮于点对点的定义，跟背公式没啥区别，无法理解">
@@ -36,14 +36,14 @@
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-ccf7e0dbf44c29c82be8212d2c004da1_1440w.webp">
 <meta property="og:image" content="https://dotafs.com/images/avatar.jpg">
 <meta property="article:published_time" content="2022-09-06T09:44:16.000Z">
-<meta property="article:modified_time" content="2024-11-02T03:33:43.193Z">
+<meta property="article:modified_time" content="2024-11-02T07:55:37.845Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dotafs.com/2022/09/06/interview-script/image.png">
   
   
   
-  <title>interview script - FS</title>
+  <title>my general notes - FS</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="interview script"></span>
+            <span id="subtitle" data-typed-text="my general notes"></span>
           
         </div>
 
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          41k words
+          42k words
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          346 mins
+          354 mins
         
       </span>
     
@@ -284,7 +284,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">interview script</h1>
+            <h1 id="seo-header">my general notes</h1>
             
             
               <div class="markdown-body">
@@ -309,6 +309,7 @@
 <ul>
 <li>$ n $ 是高光反射指数，数值越高表示表面越光滑。</li>
 </ul>
+<h4 id="Blinn-Phong"><a href="#Blinn-Phong" class="headerlink" title="Blinn-Phong"></a>Blinn-Phong</h4><p>Blinn-Phong氏光照模型是对Phong氏光照模型的改进，Phong模型在处理高光时会出现光照不连续的情况。当光源和视点位于同一个方向时，反射光线跟观察方向可能大于90度，反射光线的分量就被消除了，所以出现高光不连续的现象。Blinn-Phong模型在处理镜面反射时不使用观察方向和反射光线的夹角来计算，而是引入了一个新的向量：半程向量(Halfway vector)。半程向量其实很简单，就是入射光线向量L和观察方向V的中间位置（角平分线）。Blinn-Phong求高光亮度的时候使用半程向量和法向量的点积来决定高光亮度。Phong是用反射光线和视线向量的点积来求高光亮度。</p>
 <h4 id="Cook-Torrance-BRDF"><a href="#Cook-Torrance-BRDF" class="headerlink" title="Cook-Torrance BRDF"></a>Cook-Torrance BRDF</h4><p>Cook-Torrance 是一个完整的BRDF模型，包含分布函数 $ D $、菲涅耳项 $ F $、几何遮挡项 $ G $。公式如下：</p>
 <p>$$<br>f_r(L, V) &#x3D; \frac{D(H) \cdot F(V, H) \cdot G(L, V, H)}{4(N \cdot L)(N \cdot V)}<br>$$</p>
 <p>其中：</p>
@@ -363,6 +364,10 @@
 <li>$d\Phi $：微分辐射通量。</li>
 <li>$dA $：微分面积。</li>
 </ul>
+<h2 id="零散概念"><a href="#零散概念" class="headerlink" title="零散概念"></a>零散概念</h2><ol>
+<li>裁剪-&gt;Alpha-&gt;模板-&gt;深度</li>
+<li></li>
+</ol>
 <h1 id="graphic-pipeline"><a href="#graphic-pipeline" class="headerlink" title="graphic pipeline"></a>graphic pipeline</h1><p><strong>渲染管线概述</strong></p>
 <p>渲染管线是将三维场景转换为二维图像的过程，通常由一系列步骤组成，每个步骤在图形渲染中都有特定的功能。整个流程可以分为以下主要阶段：</p>
 <ol>
@@ -445,6 +450,31 @@
 <li>后期处理可以极大地增强视觉效果，但也需要权衡性能。</li>
 </ul>
 <hr>
+<h2 id="unity-相关"><a href="#unity-相关" class="headerlink" title="unity 相关"></a>unity 相关</h2><h3 id="GPU-Instance"><a href="#GPU-Instance" class="headerlink" title="GPU Instance"></a>GPU Instance</h3><p>GPU 实例化则是通过让 GPU 接受一组相同的几何和材质数据，但可以用不同的变换矩阵或其他参数来区分每个实例。这样，CPU 只需一次提交，GPU 可以在一次 draw call 中渲染多个实例。</p>
+<ul>
+<li>Automatic Instancing: unity自动搞。</li>
+<li>ComputeBuffer 和 Shader Instancing：对于更复杂的实例化需求，可以使用 ComputeBuffer 和 Shader 中的实例化技术。这种方法需要在 Shader 中编写实例化的逻辑，并用 ComputeBuffer 存储实例的变换矩阵、颜色等信息，然后在 Shader 中读取和应用这些数据。这种方法适合需要动态改变实例参数的场景，比如实现不同的动画效果。</li>
+</ul>
+<h2 id="风"><a href="#风" class="headerlink" title="风"></a>风</h2><p>6种不同类型的Motors</p>
+<ul>
+<li>Directional 平行风 (类似unity WindZone里的Directional)  </li>
+<li>Omni 全向风 （类似unity里的Spherial）  </li>
+<li>Vortex 旋涡，沿某个轴产生风  </li>
+<li>Moving 运动发动机，锥形，可以理解成发动机在运动，产生风场是锥形扩散的  </li>
+<li>Cylinder 圆柱的上下面可以大小不一样  </li>
+<li>Pressure 直接就是压强</li>
+</ul>
+<p>优化GPU利用：通过分离计算风速的各个分量（X、Y、Z方向），使得每个方向的计算都能并行进行，减少了等待时间，并利用了GPU的并行计算优势。</p>
+<h2 id="LOD的类型"><a href="#LOD的类型" class="headerlink" title="LOD的类型"></a>LOD的类型</h2><ul>
+<li>离散LOD：最常见的LOD类型，使用明确分隔的几个模型级别。</li>
+<li>连续LOD：使用算法在一个模型上动态增减细节，通常用于地形的渲染。</li>
+<li>屏幕空间LOD：基于对象在屏幕上占用的像素数量来决定其细节级别，适用于大型场景渲染。</li>
+</ul>
+<h2 id="C-一些我不看就忘的概念"><a href="#C-一些我不看就忘的概念" class="headerlink" title="C++ 一些我不看就忘的概念"></a>C++ 一些我不看就忘的概念</h2><h3 id="single-instance"><a href="#single-instance" class="headerlink" title="single instance"></a>single instance</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">///  内部静态变量的懒汉实现  //</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Single</span><br>&#123;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 获取单实例对象</span><br>    <span class="hljs-function"><span class="hljs-type">static</span> Single&amp; <span class="hljs-title">GetInstance</span><span class="hljs-params">()</span></span>;<br>	<br>	<span class="hljs-comment">// 打印实例地址</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Print</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-comment">// 禁止外部构造</span><br>    <span class="hljs-built_in">Single</span>();<br><br>    <span class="hljs-comment">// 禁止外部析构</span><br>    ~<span class="hljs-built_in">Single</span>();<br><br>    <span class="hljs-comment">// 禁止外部拷贝构造</span><br>    <span class="hljs-built_in">Single</span>(<span class="hljs-type">const</span> Single &amp;single) = <span class="hljs-keyword">delete</span>;<br><br>    <span class="hljs-comment">// 禁止外部赋值操作</span><br>    <span class="hljs-type">const</span> Single &amp;<span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Single &amp;single) = <span class="hljs-keyword">delete</span>;<br>&#125;;<br><span class="hljs-function">Single&amp; <span class="hljs-title">Single::GetInstance</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 局部静态特性的方式实现单实例。</span><br><span class="hljs-comment">     * 静态局部变量只在当前函数内有效，其他函数无法访问。</span><br><span class="hljs-comment">     * 静态局部变量只在第一次被调用的时候初始化，也存储在静态存储区，生命周期从第一次被初始化起至程序结束止。</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">static</span> Single single;<br>    <span class="hljs-keyword">return</span> single;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Single::Print</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;我的实例内存地址是:&quot;</span> &lt;&lt; <span class="hljs-keyword">this</span> &lt;&lt; std::endl;<br>&#125;<br><br>Single::<span class="hljs-built_in">Single</span>()<br>&#123;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;构造函数&quot;</span> &lt;&lt; std::endl;<br>&#125;<br><br>Single::~<span class="hljs-built_in">Single</span>()<br>&#123;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;析构函数&quot;</span> &lt;&lt; std::endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
 <h2 id="PSO"><a href="#PSO" class="headerlink" title="PSO"></a>PSO</h2><p><img src="/2022/09/06/interview-script/image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <h2 id="Nsight"><a href="#Nsight" class="headerlink" title="Nsight"></a>Nsight</h2><p>启动Nsight Graphics：</p>
 <p>打开Nsight Graphics工具。<br>连接到DirectX应用程序：</p>
@@ -1393,7 +1423,7 @@ int main() &#123;
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>interview script</div>
+      <div>my general notes</div>
       <div>https://dotafs.com/2022/09/06/interview-script/</div>
     </div>
     <div class="license-meta">
