@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>my TA learning path</title>
+    <link href="/2024/12/16/my-TA-learning-path/"/>
+    <url>/2024/12/16/my-TA-learning-path/</url>
+    
+    <content type="html"><![CDATA[<p>I am gonna to become a TA after several months!! </p><h1 id="Chapter-1-Wind"><a href="#Chapter-1-Wind" class="headerlink" title="Chapter 1: Wind"></a>Chapter 1: Wind</h1><h2 id="1-Navier-Stokes-Wind-Simulation"><a href="#1-Navier-Stokes-Wind-Simulation" class="headerlink" title="1. Navier-Stokes Wind Simulation"></a>1. Navier-Stokes Wind Simulation</h2><p>$$<br>\frac{\partial \mathbf{v}}{\partial t} + (\mathbf{v} \cdot \nabla) \mathbf{v} &#x3D; -\frac{1}{\rho} \nabla P + \nu \nabla^2 \mathbf{v} + \mathbf{F}<br>$$</p><ul><li>$\frac{\partial \mathbf{v}}{\partial t}$:<br>This term represents the change in fluid velocity over time.</li></ul><h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h2 id="nabla-gradient-operator"><a href="#nabla-gradient-operator" class="headerlink" title="$\nabla$(gradient operator)"></a>$\nabla$(gradient operator)</h2><p>\nabla is a vector differential operator</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Custom Toon Shaders by Unity</title>
     <link href="/2024/09/08/custom-toon-shaders-in-Unity/"/>
     <url>/2024/09/08/custom-toon-shaders-in-Unity/</url>
