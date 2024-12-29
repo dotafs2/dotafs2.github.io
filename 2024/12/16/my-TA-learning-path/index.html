@@ -24,7 +24,7 @@
 <meta property="og:description" content="I am gonna to become a TA after several months!! Happy__y! Chapter 1: Wind1. Navier-Stokes Wind SimulationStep 1: (origin formula)$$\frac{\partial \mathbf{v}}{\partial t} + (\mathbf{v} \cdot \nabla) \">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-16T06:27:37.000Z">
-<meta property="article:modified_time" content="2024-12-29T04:34:51.433Z">
+<meta property="article:modified_time" content="2024-12-29T04:38:08.853Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          375 words
+          547 words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          4 mins
+          5 mins
         
       </span>
     
@@ -294,7 +294,24 @@
 <p>$$<br>\frac{u}{\rho} \nabla^2 v_i<br>$$</p>
 <p>equal to </p>
 <p>$$<br>\frac{u}{\rho} \left( \frac{\partial^2 v_i}{\partial x_1^2} + \frac{\partial^2 v_i}{\partial x_2^2} + \frac{\partial^2 v_i}{\partial x_3^2} \right)<br>$$</p>
-<p>put it in the origin formula we got:<br>$$<br>\rho \frac{\partial v_i}{\partial t} + \rho v_j \frac{\partial v_i}{\partial x_j} &#x3D; \rho f_i - \frac{\partial P}{\partial x_i} + u \left( \frac{\partial^2 v_i}{\partial x_1^2} + \frac{\partial^2 v_i}{\partial x_2^2} + \frac{\partial^2 v_i}{\partial x_3^2} \right)<br>$$</p>
+<p>put it in the origin formula we got:<br>$$<br>\rho \frac{\partial v_i}{\partial t} + \rho v_j \frac{\partial v_i}{\partial x_j} &#x3D; \rho f_i - \frac{\partial P}{\partial x_i} + u \left( \frac{\partial^2 v_i}{\partial x_1^2} + \frac{\partial^2 v_i}{\partial x_2^2} + \frac{\partial^2 v_i}{\partial x_3^2} \right)<br>$$x</p>
+<h3 id="Step-5-final-formula"><a href="#Step-5-final-formula" class="headerlink" title="Step 5: (final formula)"></a>Step 5: (final formula)</h3><p>$$\rho \frac{\partial v_i}{\partial t} + \rho v_j \frac{\partial v_i}{\partial x_j} &#x3D; \rho f_i - \frac{\partial P}{\partial x_i} + u \frac{\partial^2 v_i}{\partial x_j^2}$$</p>
+<ol>
+<li><p><strong>左边：流体的惯性项</strong></p>
+<ul>
+<li>$\rho \frac{\partial v_i}{\partial t}$：速度分量 $v_i$ 的时间变化部分，描述流体的加速度。</li>
+<li>$\rho v_j \frac{\partial v_i}{\partial x_j}$：对流部分，描述流体由于自身速度引起的变化。</li>
+</ul>
+</li>
+<li><p><strong>右边：流体的外力、压力梯度和黏性力</strong></p>
+<ul>
+<li>$\rho f_i$：外力，例如重力。</li>
+<li>$-\frac{\partial P}{\partial x_i}$：压力梯度的影响。</li>
+<li>$u \frac{\partial^2 v_i}{\partial x_j^2}$：黏性力，用二阶导数表示。</li>
+</ul>
+</li>
+</ol>
+<p>这就是 <strong>Navier-Stokes 方程的分量形式</strong>，描述了流体在受力平衡下的运动状态，涵盖了时间变化、空间对流、外力、压力和黏性效应。</p>
 <h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h2 id="nabla-gradient-operator"><a href="#nabla-gradient-operator" class="headerlink" title="$\nabla$(gradient operator)"></a>$\nabla$(gradient operator)</h2><p>$\nabla$ is a vector differential operator</p>
 <p>$$<br>\nabla &#x3D; \left(\frac{\partial}{\partial x}, , \frac{\partial}{\partial y}, , \frac{\partial}{\partial z}\right).<br>$$</p>
 <p>$$<br>\nabla \times \mathbf{v} ;&#x3D;;<br>\begin{vmatrix}<br>\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \<br>\frac{\partial}{\partial x} &amp; \frac{\partial}{\partial y} &amp; \frac{\partial}{\partial z} \<br>v_x &amp; v_y &amp; v_z<br>\end{vmatrix}.<br>$$<br>i,j,k: unit vector</p>
