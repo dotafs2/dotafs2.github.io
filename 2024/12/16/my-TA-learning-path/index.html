@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="FS">
 <meta property="og:description" content="I am gonna to become a TA after several months!! Happy__y! Chapter 1: Wind1. Navier-Stokes Wind Simulation1.1 Intro$$\frac{\partial v}{\partial t} &#x3D; \mathbf{F} + \frac{\mu}{\rho} \nabla^2 V_i - (">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-12-16T06:27:37.000Z">
-<meta property="article:modified_time" content="2024-12-29T05:46:02.894Z">
+<meta property="article:published_time" content="2024-12-16T19:27:37.000Z">
+<meta property="article:modified_time" content="2024-12-30T06:31:39.725Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -85,7 +85,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end end --></head>
 
 
 <body>
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          853 words
+          842 words
         
       </span>
     
@@ -286,7 +286,6 @@
 </ul>
 <h4 id="1-1-1-mathbf-F"><a href="#1-1-1-mathbf-F" class="headerlink" title="1.1.1 $\mathbf{F}$"></a>1.1.1 $\mathbf{F}$</h4><p>外力。加在速度场中间的外力。</p>
 <h4 id="1-1-2-frac-mu-rho-nabla-2-V-i"><a href="#1-1-2-frac-mu-rho-nabla-2-V-i" class="headerlink" title="1.1.2 $\frac{\mu}{\rho} \nabla^2 V_i$"></a>1.1.2 $\frac{\mu}{\rho} \nabla^2 V_i$</h4><p>扩散项。扩散项主要是描述场是如何在空间内平滑&#x2F;扩散的。$\mu$ 是动力粘度，$\rho$ 是流体密度。$V_i$ 是拉普拉斯算子，描述的是空间二维导数。高粘性物体(蜂蜜)，流动趋近于平滑。欧拉视角(网格)下扩散想可以理解为，当前网格于周边6格(3D)交换。如果某网格速度高，周围网格速度低，扩散项会让它们的速度逐渐接近通过‘交换’。</p>
-<p>$x &#x3D; x_0 +a*(\textbf{sum}_p – \textbf{num} * x_0 )*dt$</p>
 <p>推导</p>
 <ol>
 <li><p>原公式：<br>$x_0 &#x3D; x - a \cdot (\text{sum}_c - \text{num} \cdot x) \cdot \Delta t$</p>
