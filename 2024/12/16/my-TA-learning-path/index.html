@@ -24,7 +24,7 @@
 <meta property="og:description" content="Chapter 1: Wind1.1  Navier-Stokes Wind Simulation$$ \frac{Dv}{Dt} &#x3D; \frac{\partial v}{\partial t} + (V_i \cdot \nabla)V_i  &#x3D; \mathbf{F} + \frac{\mu}{\rho} \nabla^2 V_i - \frac{1}{\rho}P$$  $">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-16T19:27:37.000Z">
-<meta property="article:modified_time" content="2025-02-24T19:16:03.154Z">
+<meta property="article:modified_time" content="2025-02-24T20:10:46.922Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          453 words
+          945 words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          4 mins
+          8 mins
         
       </span>
     
@@ -292,9 +292,42 @@
 <h2 id="Integral-Example"><a href="#Integral-Example" class="headerlink" title="Integral Example"></a>Integral Example</h2><p>step 1 : $$V(t) &#x3D; V(0) + \int_0^t (Q_{\text{in}} - Q_{\text{out}}) , dt$$</p>
 <p>假设池塘水量<code>V(T)</code>在时间<code>t</code>的总量，是最初水量<code>V(0)</code>加上流入流出累积量。</p>
 <p>step 2 : $$ \frac{d}{dt} \left[ V(0) + \int_0^t \left( Q_{\text{in}} - Q_{\text{out}} \right) dt \right] $$</p>
-<p>根据<a href="#calculus_rule">Calculus Rule</a><br>(如下)得到step2,<br>$$\frac{d}{dt} \int_{a}^{t} f(x) ,dx &#x3D; f(t)<br>$$</p>
+<p>对右侧函数求导，并且<code>V(0)是常数</code>得到step3</p>
+<p>step3 :<br>$$<br>\frac{dV}{dt} &#x3D; \frac{d}{dt} \int_{0}^{t} (Q_{\text{in}} - Q_{\text{out}}) , dt<br>$$</p>
+<p>根据<a href="#calculus_rule">Calculus Rule</a>(下面的公式)得到step4,<br>$$\frac{d}{dt} \int_{a}^{t} f(x) ,dx &#x3D; f(t)<br>$$</p>
+<p>step4 : $$\frac{dV}{dt} &#x3D; Q_{in} - Q_{out}$$</p>
 <p><a id="calculus_rule"></a></p>
-<h2 id="Calculus-Rule"><a href="#Calculus-Rule" class="headerlink" title="Calculus Rule"></a>Calculus Rule</h2>
+<h2 id="Calculus-Rule"><a href="#Calculus-Rule" class="headerlink" title="Calculus Rule"></a>Calculus Rule</h2><p>Overall, 积分的导数等于被积函数本身，即<code>微积分互为逆运算</code>,下面是推导。</p>
+<p>根据导数的定义：</p>
+<p>$$<br>F’(t) &#x3D; \lim_{\Delta t \to 0} \frac{F(t+\Delta t) - F(t)}{\Delta t}<br>$$</p>
+<p>用积分函数 ( F(t) ) 代入：</p>
+<p>$$<br>F(t+\Delta t) &#x3D; \int_{a}^{t+\Delta t} f(x) ,dx<br>$$</p>
+<p>$$<br>F(t) &#x3D; \int_{a}^{t} f(x) ,dx<br>$$</p>
+<p>所以：</p>
+<p>$$<br>F(t+\Delta t) - F(t) &#x3D; \int_{a}^{t+\Delta t} f(x) ,dx - \int_{a}^{t} f(x) ,dx<br>$$</p>
+<p>根据 <strong>积分的可加性</strong>，我们可以拆分成：</p>
+<p>$$<br>F(t+\Delta t) - F(t) &#x3D; \int_{t}^{t+\Delta t} f(x) ,dx<br>$$</p>
+<p>现在我们把这个代入导数定义：</p>
+<p>$$<br>F’(t) &#x3D; \lim_{\Delta t \to 0} \frac{\int_{t}^{t+\Delta t} f(x) ,dx}{\Delta t}<br>$$</p>
+<p>当 $ \Delta t \to 0 $ 时，由于积分 $ \int_{t}^{t+\Delta t} f(x) ,dx $ 只是对一个很小的区间积分，我们可以用<a href="#mean_value">Mean Value Theorem for Integrals</a>近似：</p>
+<p>$$<br>\int_{t}^{t+\Delta t} f(x) ,dx \approx f(t) \cdot \Delta t<br>$$</p>
+<p>代入上面的公式：</p>
+<p>$$<br>F’(t) &#x3D; \lim_{\Delta t \to 0} \frac{f(t) \cdot \Delta t}{\Delta t} &#x3D; f(t)<br>$$</p>
+<p>这就得到了：</p>
+<p>$$<br>\frac{d}{dt} \int_{a}^{t} f(x) ,dx &#x3D; f(t)<br>$$</p>
+<p><a id="mean_value"></a></p>
+<h2 id="Mean-Value-Theorem-for-Integrals"><a href="#Mean-Value-Theorem-for-Integrals" class="headerlink" title="Mean Value Theorem for Integrals"></a>Mean Value Theorem for Integrals</h2><p>ps: 总的来说我觉得类似于monte carlo methods, 都是用代表性点来对整个区间去平均值。</p>
+<p>在微积分中，<strong>定积分的平均值定理</strong>（Mean Value Theorem for Integrals）告诉我们：</p>
+<p>$$<br>\int_{a}^{b} f(x) ,dx &#x3D; f(c) \cdot (b - a), \quad \text{for some } c \in [a, b]<br>$$</p>
+<p>这意味着，在区间 $[a,b]$ 内，存在一个特殊点 <code>c</code>，使得函数 <code>f(x)</code> 的值可以代表整个区间的平均行为。</p>
+<hr>
+<p>我们对<strong>很小的区间</strong> $[t, t+\Delta t]$ 进行积分：</p>
+<p>$$<br>\int_{t}^{t+\Delta t} f(x) ,dx<br>$$</p>
+<p>由于 $\Delta t$ <strong>非常小</strong>，( f(x) ) 在这个小区间内变化不会很大，因此我们可以用<strong>平均值定理</strong>来近似：</p>
+<p>$$<br>\int_{t}^{t+\Delta t} f(x) ,dx \approx f(t) \cdot \Delta t<br>$$</p>
+<p>这样，我们就能<strong>简化导数的计算</strong>，使得：</p>
+<p>$$<br>F’(t) &#x3D; \lim_{\Delta t \to 0} \frac{\int_{t}^{t+\Delta t} f(x) ,dx}{\Delta t} &#x3D; f(t)<br>$$</p>
+
                 
               </div>
             
