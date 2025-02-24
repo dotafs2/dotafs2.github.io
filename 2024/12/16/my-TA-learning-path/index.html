@@ -24,7 +24,7 @@
 <meta property="og:description" content="Chapter 1: Wind1.1  Navier-Stokes Wind Simulation$$ \frac{Dv}{Dt} &#x3D; \frac{\partial v}{\partial t} + (V_i \cdot \nabla)V_i  &#x3D; \mathbf{F} + \frac{\mu}{\rho} \nabla^2 V_i - \frac{1}{\rho}P$$  $">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-16T19:27:37.000Z">
-<meta property="article:modified_time" content="2025-02-23T19:22:34.563Z">
+<meta property="article:modified_time" content="2025-02-24T19:16:03.154Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          350 words
+          453 words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          3 mins
+          4 mins
         
       </span>
     
@@ -288,7 +288,13 @@
 <h3 id="material-derivative"><a href="#material-derivative" class="headerlink" title="material derivative"></a>material derivative</h3><p>物质导数 &#x3D; Local Dervative + Convective Term.速度场中一个质点感受到的加速度 &#x3D; 站在原地本身因为时间变化而产生的速度变化 + 因为</p>
 <h3 id="mathbf-F"><a href="#mathbf-F" class="headerlink" title="$\mathbf{F}$"></a>$\mathbf{F}$</h3><p>外力。加在速度场中间的外力。</p>
 <h3 id="frac-mu-rho-nabla-2-V-i"><a href="#frac-mu-rho-nabla-2-V-i" class="headerlink" title="$\frac{\mu}{\rho} \nabla^2 V_i$"></a>$\frac{\mu}{\rho} \nabla^2 V_i$</h3><p>扩散项。扩散项主要是描述场是如何在空间内平滑&#x2F;扩散的。$\mu$ 是动力粘度，$\rho$ 是流体密度。$V_i$ 是拉普拉斯算子，描述的是空间二维导数。高粘性物体(蜂蜜)，流动趋近于平滑。欧拉视角(网格)下扩散想可以理解为，当前网格于周边6格(3D)交换。如果某网格速度高，周围网格速度低，扩散项会让它们的速度逐渐接近通过‘交换’。</p>
-
+<h1 id="Integral-Equation"><a href="#Integral-Equation" class="headerlink" title="Integral Equation"></a>Integral Equation</h1><p>好多年没碰过微积分了，认真学习一遍。</p>
+<h2 id="Integral-Example"><a href="#Integral-Example" class="headerlink" title="Integral Example"></a>Integral Example</h2><p>step 1 : $$V(t) &#x3D; V(0) + \int_0^t (Q_{\text{in}} - Q_{\text{out}}) , dt$$</p>
+<p>假设池塘水量<code>V(T)</code>在时间<code>t</code>的总量，是最初水量<code>V(0)</code>加上流入流出累积量。</p>
+<p>step 2 : $$ \frac{d}{dt} \left[ V(0) + \int_0^t \left( Q_{\text{in}} - Q_{\text{out}} \right) dt \right] $$</p>
+<p>根据<a href="#calculus_rule">Calculus Rule</a><br>(如下)得到step2,<br>$$\frac{d}{dt} \int_{a}^{t} f(x) ,dx &#x3D; f(t)<br>$$</p>
+<p><a id="calculus_rule"></a></p>
+<h2 id="Calculus-Rule"><a href="#Calculus-Rule" class="headerlink" title="Calculus Rule"></a>Calculus Rule</h2>
                 
               </div>
             
