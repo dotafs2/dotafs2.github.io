@@ -23,10 +23,13 @@
 <meta property="og:site_name" content="FS">
 <meta property="og:description" content="Chapter 1: Wind1.1  Navier-Stokes Wind Simulation$$ \frac{Dv}{Dt} &#x3D; \frac{\partial v}{\partial t} + (V_i \cdot \nabla)V_i  &#x3D; \mathbf{F} + \frac{\mu}{\rho} \nabla^2 V_i - \frac{1}{\rho}P$$  $">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://dotafs.com/2024/12/16/my-TA-learning-path/1.png">
+<meta property="og:image" content="https://dotafs.com/2024/12/16/my-TA-learning-path/2.png">
 <meta property="article:published_time" content="2024-12-16T19:27:37.000Z">
-<meta property="article:modified_time" content="2025-03-29T16:33:21.974Z">
+<meta property="article:modified_time" content="2025-04-04T18:23:36.665Z">
 <meta property="article:author" content="DOTAFS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dotafs.com/2024/12/16/my-TA-learning-path/1.png">
   
   
   
@@ -223,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          952 words
+          992 words
         
       </span>
     
@@ -234,7 +237,7 @@
         
         
         
-          8 mins
+          9 mins
         
       </span>
     
@@ -327,7 +330,11 @@
 <p>$$<br>\int_{t}^{t+\Delta t} f(x) ,dx \approx f(t) \cdot \Delta t<br>$$</p>
 <p>这样，我们就能<strong>简化导数的计算</strong>，使得：</p>
 <p>$$<br>F’(t) &#x3D; \lim_{\Delta t \to 0} \frac{\int_{t}^{t+\Delta t} f(x) ,dx}{\Delta t} &#x3D; f(t)<br>$$</p>
-<h1 id="Chapter-2-Cloud"><a href="#Chapter-2-Cloud" class="headerlink" title="Chapter 2: Cloud"></a>Chapter 2: Cloud</h1><h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><ol>
+<h1 id="Chapter-2-Cloud"><a href="#Chapter-2-Cloud" class="headerlink" title="Chapter 2: Cloud"></a>Chapter 2: Cloud</h1><p>照着[<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/622654876]%E7%9A%84%E6%95%99%E7%A8%8B%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%A6%82%E4%B8%8B%E3%80%82">https://zhuanlan.zhihu.com/p/622654876]的教程实现了如下。</a></p>
+<p><img src="/2024/12/16/my-TA-learning-path/1.png" srcset="/img/loading.gif" lazyload></p>
+<p>但发现相机没法进入包围盒，进入包围盒的部分不会raymarching。</p>
+<p><img src="/2024/12/16/my-TA-learning-path/2.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><ol>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/622654876">https://zhuanlan.zhihu.com/p/622654876</a></li>
 </ol>
 
