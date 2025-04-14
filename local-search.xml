@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>a XR game playground</title>
+    <link href="/2025/04/14/a-XR-game-playground/"/>
+    <url>/2025/04/14/a-XR-game-playground/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"autoplay":true,"theme":"#FADFA3","loop":true,"lang":"zh-cn//语言","screenshot":true,"hotkey":true,"preload":"auto","volume":0.9,"video":{"url":"/a-XR-game-playground/xr.mp4","pic":"/resources/images/scenery_three.jpeg"},"danmaku":{"id":"9E2E3368B56CD123BB4","api":"https://api.prprpr.me/dplayer/","token":"tokendemo","maximum":1000,"addition":["['https://api.prprpr.me/dplayer/v3/bilibili?aid=4157142']"]}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>my houdini examples</title>
     <link href="/2025/03/03/my-houdini-examples/"/>
     <url>/2025/03/03/my-houdini-examples/</url>
