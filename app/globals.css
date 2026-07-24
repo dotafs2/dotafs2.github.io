@@ -1,0 +1,437 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #03070a;
+  --water: #84dcff;
+  --line: rgba(179, 228, 247, 0.2);
+  --paper: #eaf9ff;
+  --mono: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  --sans: "Segoe UI Variable Display", "Arial Nova", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+.fluidPage,
+.fluidStage,
+.fluidCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fluidPage {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 100%, rgba(13, 89, 130, 0.18), transparent 54%),
+    var(--ink);
+}
+
+.fluidCanvas {
+  z-index: 1;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.smokeCanvas {
+  cursor: crosshair;
+}
+
+.fluidStage::after {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 15%, transparent 85%, rgba(0, 0, 0, 0.3)),
+    linear-gradient(rgba(0, 0, 0, 0.28), transparent 20%, transparent 76%, rgba(0, 0, 0, 0.42));
+}
+
+.interfaceLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  border: 1px solid rgba(132, 220, 255, 0.14);
+}
+
+.interfaceLayer::before,
+.interfaceLayer::after {
+  position: absolute;
+  pointer-events: none;
+  content: "";
+  background: var(--line);
+}
+
+.interfaceLayer::before {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  opacity: 0.22;
+}
+
+.interfaceLayer::after {
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  opacity: 0.15;
+}
+
+.corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: clamp(0.55rem, 0.65vw, 0.7rem);
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
+}
+
+.corner span {
+  color: rgba(234, 249, 255, 0.55);
+}
+
+.corner strong {
+  color: var(--paper);
+  font-size: clamp(0.72rem, 0.9vw, 0.95rem);
+  font-weight: 600;
+}
+
+.cornerTopLeft {
+  top: clamp(1rem, 2.4vw, 2.4rem);
+  left: clamp(1rem, 2.4vw, 2.4rem);
+}
+
+.cornerTopRight {
+  top: clamp(1rem, 2.4vw, 2.4rem);
+  right: clamp(1rem, 2.4vw, 2.4rem);
+  align-items: flex-end;
+}
+
+.cornerBottomLeft {
+  bottom: clamp(1rem, 2.4vw, 2.4rem);
+  left: clamp(1rem, 2.4vw, 2.4rem);
+}
+
+.cornerBottomRight {
+  right: clamp(1rem, 2.4vw, 2.4rem);
+  bottom: clamp(1rem, 2.4vw, 2.4rem);
+  align-items: flex-end;
+}
+
+.fluidStatus {
+  position: fixed;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  min-width: 12rem;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+  border: 1px solid var(--line);
+  color: rgba(234, 249, 255, 0.5);
+  background: rgba(3, 7, 10, 0.64);
+  backdrop-filter: blur(12px);
+  font-family: var(--mono);
+  font-size: 0.53rem;
+  letter-spacing: 0.08em;
+  transform: translate(-50%, -50%);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.fluidStatus strong {
+  color: var(--water);
+  font-size: inherit;
+  font-weight: 500;
+}
+
+.fluidStatus.isReady {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 8px));
+  pointer-events: none;
+}
+
+.surfaceToggle {
+  position: fixed;
+  z-index: 6;
+  top: clamp(4.6rem, 7vw, 6.8rem);
+  right: clamp(1rem, 2.4vw, 2.4rem);
+  min-width: 7.8rem;
+  padding: 0.58rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  border: 1px solid rgba(132, 220, 255, 0.22);
+  border-radius: 0;
+  color: rgba(234, 249, 255, 0.55);
+  background: rgba(3, 7, 10, 0.68);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.surfaceToggle::before {
+  width: 0.38rem;
+  height: 0.38rem;
+  flex: 0 0 auto;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.surfaceToggle strong {
+  color: var(--paper);
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.surfaceToggle:hover,
+.surfaceToggle:focus-visible {
+  border-color: rgba(132, 220, 255, 0.68);
+  color: var(--water);
+  outline: none;
+}
+
+.surfaceToggle[aria-pressed="true"] {
+  border-color: rgba(132, 220, 255, 0.52);
+  color: var(--water);
+  background: rgba(7, 80, 126, 0.42);
+}
+
+.surfaceToggle[aria-pressed="true"]::before {
+  border-color: var(--water);
+  background: var(--water);
+  box-shadow: 0 0 10px rgba(132, 220, 255, 0.7);
+}
+
+.simulationModeSwitch {
+  position: fixed;
+  z-index: 8;
+  top: clamp(1rem, 2.4vw, 2.4rem);
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid rgba(132, 220, 255, 0.2);
+  background: rgba(3, 7, 10, 0.68);
+  backdrop-filter: blur(12px);
+  transform: translateX(-50%);
+}
+
+.simulationModeSwitch button {
+  min-width: 5.6rem;
+  padding: 0.58rem 0.82rem;
+  border: 0;
+  color: rgba(234, 249, 255, 0.42);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.simulationModeSwitch button + button {
+  border-left: 1px solid rgba(132, 220, 255, 0.16);
+}
+
+.simulationModeSwitch button:hover,
+.simulationModeSwitch button:focus-visible {
+  color: var(--paper);
+  outline: none;
+}
+
+.simulationModeSwitch button[aria-pressed="true"] {
+  color: var(--water);
+  background: rgba(16, 99, 145, 0.34);
+  text-shadow: 0 0 12px rgba(132, 220, 255, 0.35);
+}
+
+.surfaceControl {
+  position: fixed;
+  z-index: 6;
+  top: clamp(7.9rem, 10.5vw, 10.1rem);
+  right: clamp(1rem, 2.4vw, 2.4rem);
+  width: 11.5rem;
+  padding: 0.62rem 0.72rem 0.68rem;
+  border: 1px solid rgba(132, 220, 255, 0.17);
+  color: rgba(234, 249, 255, 0.48);
+  background: rgba(3, 7, 10, 0.62);
+  backdrop-filter: blur(10px);
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 160ms ease;
+}
+
+.surfaceControl > span {
+  margin-bottom: 0.62rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.surfaceControl b {
+  font-weight: 500;
+}
+
+.surfaceControl output {
+  color: var(--water);
+}
+
+.surfaceControl input {
+  width: 100%;
+  height: 1px;
+  display: block;
+  appearance: none;
+  border: 0;
+  outline: none;
+  background: rgba(132, 220, 255, 0.24);
+  cursor: ew-resize;
+}
+
+.surfaceControl input::-webkit-slider-thumb {
+  width: 0.55rem;
+  height: 0.55rem;
+  appearance: none;
+  border: 1px solid var(--water);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 8px rgba(132, 220, 255, 0.45);
+}
+
+.surfaceControl input::-moz-range-thumb {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid var(--water);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 8px rgba(132, 220, 255, 0.45);
+}
+
+.surfaceControl.isDisabled {
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.weatherControls {
+  position: fixed;
+  z-index: 7;
+  top: clamp(4.6rem, 7vw, 6.8rem);
+  right: clamp(1rem, 2.4vw, 2.4rem);
+  width: 11.5rem;
+  display: grid;
+  gap: 0.68rem;
+}
+
+.weatherControls > .surfaceToggle,
+.weatherControls > .surfaceControl {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.fallbackBadge {
+  position: fixed;
+  z-index: 7;
+  top: 0.7rem;
+  left: 50%;
+  padding: 0.42rem 0.62rem;
+  border: 1px solid rgba(255, 177, 92, 0.42);
+  color: rgba(255, 202, 139, 0.9);
+  background: rgba(26, 14, 4, 0.82);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.smokeUnavailable {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 100%, rgba(66, 128, 160, 0.16), transparent 52%),
+    var(--ink);
+}
+
+@media (max-width: 640px) {
+  .cornerBottomRight {
+    display: none;
+  }
+
+  .surfaceToggle {
+    top: 4.1rem;
+  }
+
+  .surfaceControl {
+    top: 7.1rem;
+    width: 10rem;
+  }
+
+  .weatherControls {
+    top: 4.1rem;
+    width: 10rem;
+  }
+
+  .simulationModeSwitch {
+    top: 1rem;
+  }
+
+  .simulationModeSwitch button {
+    min-width: 4.6rem;
+    padding-inline: 0.62rem;
+  }
+
+  .interfaceLayer::before,
+  .interfaceLayer::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fluidStatus {
+    transition: none;
+  }
+}
